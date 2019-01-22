@@ -4,13 +4,15 @@
 import requests
 import hashlib
 import getpass
+import lastpass
 
 
 class CheckPassword:
 
     def __init__(self):
 
-        self.main()
+        self.lastpass_connect()
+        #self.main()
 
     def main(self):
 
@@ -46,6 +48,19 @@ class CheckPassword:
 
         return found_list
 
+    def lastpass_connect(self):
+
+        username = input("lastpass username:")
+        password = getpass.getpass("lastpass password:")
+        mfa_code = getpass.getpass("lastapss mfa code:")
+        vault = lastpass.Vault.open_remote(username, password, mfa_code)
+
+        for i in vault.accounts:
+            print(i.id, i.username, i.password, i.url)
+
+    def lastpass_names(self, ):
+
+        pass
 
 if __name__ == '__main__':
     CheckPassword()
