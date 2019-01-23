@@ -10,7 +10,6 @@ class Pwned:
 
         print("test")
 
-    @click.command()
     def test(self):
 
         print("gahhh")
