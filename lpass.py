@@ -32,9 +32,9 @@ class LPass:
             exit('missing or incorrect lastpass username')
 
         for i in vault.accounts:
-            self.id_list.append(i.id)
-            self.username_list.append(i.username)
-            self.password_list.append(i.password)
-            self.url_list.append(i.url)
+            self.id_list.append(i.id.decode("utf-8"))
+            self.username_list.append(i.username.decode("utf-8"))
+            self.password_list.append(i.password.decode("utf-8"))
+            self.url_list.append(i.url.decode("utf-8"))
 
         return self.id_list, self.username_list, self.password_list, self.url_list

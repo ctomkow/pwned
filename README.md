@@ -1,9 +1,17 @@
-# haveibeenpwned
-A simple, secure way to check whether your password exists in haveibeenpwned database
+# pwned
+Check whether a password exists in haveibeenpwned database. Either provide a single password as a cli command, interactively (to hide the password), or pull from a lastpass account.
 
-### install
-`git clone https://github.com/ctomkow/haveibeenpwned.git`
+### Install
+`git clone https://github.com/ctomkow/pwned.git`
 
-`cd haveibeenpwned`
+`cd pwned`
 
-`./check_password.py`
+`./pwned --help`
+
+### Usage
+
+* `./pwned password -i`
+
+* `./pwned lastpass -u username@domain.com -i -h`
+
+

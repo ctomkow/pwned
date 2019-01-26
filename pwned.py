@@ -44,11 +44,19 @@ class Pwned:
         if haveibeenpwned:
             haveibeenpwned = HaveIBeen()
             for pass_id, username, password, url in zip(id_list, username_list, password_list, url_list):
+                # print(pass_id)
+                # print('\n')
+                # print(username)
+                # print('\n')
+                # print(password)
+                # print('\n')
+                # print(url)
+                # print('\n')
                 if haveibeenpwned.check_password(password):
                     print(
-                        "id:" + pass_id +
-                        "username:" + username +
-                        "password:" + password +
+                        "id:" + pass_id + "---" +
+                        "username:" + username + "---" +
+                        "password:" + password + "---" +
                         "url:" + url
                     )
 
