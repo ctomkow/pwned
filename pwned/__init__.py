@@ -1,2 +1,1 @@
-from .lpass import lpass
-from .haveibeen import haveibeen
+from .pwned import Pwned
