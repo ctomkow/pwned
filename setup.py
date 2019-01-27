@@ -9,5 +9,10 @@ setup(
     license='MIT',
     packages=['pwned'],
     install_requires=['lastpass-python', 'click', 'requests'],
+    entry_points={
+          'console_scripts': [
+              'pwned = pwned.pwned:main'
+          ]
+      },
     zip_safe=False
 )
