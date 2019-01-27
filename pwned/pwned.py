@@ -4,8 +4,8 @@
 from getpass import getpass
 
 # local imports
-from lpass import LPass
-from haveibeen import HaveIBeen
+from lpass.lpass import LPass
+from haveibeen.haveibeen import HaveIBeen
 
 # 3rd party imports
 import click
