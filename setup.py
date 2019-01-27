@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 REQUIRES_PYTHON = '>=3.5.0'
 
@@ -9,7 +9,7 @@ setup(
     author='Craig Tomkow',
     author_email='ctomkow@gmail.com',
     license='MIT',
-    packages=["pwned", "pwned.haveibeen", "pwned.lpass"],
+    packages=find_packages(),
     install_requires=['lastpass-python', 'click', 'requests'],
     entry_points={
           'console_scripts': ['pwned=pwned.pwned:Pwned'],
