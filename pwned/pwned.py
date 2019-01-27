@@ -67,3 +67,8 @@ class Pwned:
             print('password EXISTS in haveibeenpwned database')
         else:
             print('password DOES NOT EXIST in haveibeenpwned database')
+
+
+if __name__ == '__main__':
+
+    Pwned()
