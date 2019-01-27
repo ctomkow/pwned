@@ -7,7 +7,7 @@ setup(
     author='Craig Tomkow',
     author_email='ctomkow@gmail.com',
     license='MIT',
-    py_modules=['pwned', 'lpass', 'haveibeen'],
+    packages=['pwned'],
     install_requires=['lastpass-python', 'click', 'requests'],
     zip_safe=False
 )
