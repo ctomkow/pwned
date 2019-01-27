@@ -13,9 +13,14 @@ OR (if you like virtual python environments)
 
 3. `pip3 install git+https://github.com/ctomkow/pwned.git`
 
-`pwned --help`
+OR (if install location is not in your path, and you're feeling adventurous)
+
+1. `sudo pip3 install git+https://github.com/ctomkow/pwned.git`
+
 
 ### Usage
+
+* `pwned --help`
 
 * `pwned password -i`
 
