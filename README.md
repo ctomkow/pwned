@@ -27,3 +27,10 @@ OR (if install location is not in your path, and you're feeling adventurous)
 * `pwned lastpass -u username@domain.com -i -h`
 
 
+### Development Notes
+
+For development, use virtualenv for testing (even with an IDE such as PyCharm).
+Simply, have a terminal in the venv instance, and `python setup.py install`, to test the cli.
+
+
+
