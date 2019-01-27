@@ -2,16 +2,14 @@
 Check whether a password exists in haveibeenpwned database. Either provide a single password as a cli command, interactively (to hide the password), or pull from a lastpass account.
 
 ### Install
-`git clone https://github.com/ctomkow/pwned.git`
+`pip install git+https://github.com/ctomkow/pwned.git`
 
-`cd pwned`
-
-`./pwned --help`
+`pwned --help`
 
 ### Usage
 
-* `./pwned password -i`
+* `pwned password -i`
 
-* `./pwned lastpass -u username@domain.com -i -h`
+* `pwned lastpass -u username@domain.com -i -h`
 
 
