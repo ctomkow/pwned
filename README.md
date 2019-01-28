@@ -1,4 +1,6 @@
 # pwned
+[![Build Status](https://travis-ci.org/ctomkow/pwned.svg?branch=master)](https://travis-ci.org/ctomkow/pwned)
+
 Check whether a password exists in haveibeenpwned database. Either provide a single password as a cli command, interactively (to hide the password), or pull from a lastpass account.
 
 ### Install
