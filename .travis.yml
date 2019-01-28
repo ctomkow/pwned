@@ -13,3 +13,6 @@ install:
 
 script:
    - py.test --cov=pwned tests/
+
+after_success:
+  - bash < (curl -s https://codecov.io/bash)
