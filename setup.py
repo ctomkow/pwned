@@ -10,7 +10,11 @@ setup(
     author_email='ctomkow@gmail.com',
     license='MIT',
     packages=find_packages(),
-    install_requires=['lastpass-python', 'click', 'requests'],
+    install_requires=[
+        'click>=7.0',
+        'requests>=2.21.0'
+        'lastpass-python>=0.3.1',
+    ],
     entry_points={
           'console_scripts': ['pwned=pwned.pwned:Pwned'],
       },
