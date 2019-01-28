@@ -1,0 +1,15 @@
+#  simple travis ci file
+language: python
+
+python:
+  - "3.5"
+  - "3.6"
+
+before_install:
+   - pip install -U pip
+   - pip install git+git://github.com/ctomkow/pwned
+
+install:
+
+script:
+   - python -m tests.haveibeen.test_haveibeen
