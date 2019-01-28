@@ -10,6 +10,7 @@ before_install:
    - pip install git+git://github.com/ctomkow/pwned
 
 install:
+  - pip install pytest pytest-cov
 
 script:
-   - python -m tests.haveibeen.test_haveibeen
+   - py.test --cov=pwned tests/
