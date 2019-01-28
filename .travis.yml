@@ -8,7 +8,7 @@ python:
 before_install:
    - pip install -U pip
    - pip install git+git://github.com/ctomkow/pwned
-   - pip install --user codecov
+   - pip install codecov
 
 install:
 
