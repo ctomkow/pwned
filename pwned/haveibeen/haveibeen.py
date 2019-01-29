@@ -31,6 +31,9 @@ class HaveIBeen:
 
     def _hash_password(self, password):
 
+        if not password:
+            raise ValueError("Incorrect password input. Must be not empty")
+
         hash_obj = hashlib.sha1()
         hash_obj.update(password.encode())
         return hash_obj.hexdigest().upper()
