@@ -2,7 +2,6 @@
 
 # system imports
 import unittest
-import logging
 import hashlib
 
 # local imports
@@ -19,11 +18,9 @@ class test_UpgradeCode(unittest.TestCase):
         self.test_pass2 = ''
         self.test_pass3 = None
 
-        self.test_prefix = 'aaaaa'
         self.test_suffix = 'zzzzz'
         self.test_list1 = ['xxxxx', 'yyyyy']
         self.test_list2 = ['xxxxx', 'yyyyy', 'zzzzz']
-        self.test_list3 = ['zzzzz', 'xxxxx', 'yyyyy', 'zzzzz']
 
     def test_hash_password(self):
 
@@ -34,14 +31,10 @@ class test_UpgradeCode(unittest.TestCase):
         self.assertRaises(ValueError, HaveIBeen._hash_password, self, self.test_pass2)
         self.assertRaises(ValueError, HaveIBeen._hash_password, self, self.test_pass3)
 
-    def test_search_list(self):
+    def test_exists(self):
 
-        found_list1 = HaveIBeen._search_list(self, self.test_prefix, self.test_suffix, self.test_list1)
-        found_list2 = HaveIBeen._search_list(self, self.test_prefix, self.test_suffix, self.test_list2)
-        found_list3 = HaveIBeen._search_list(self, self.test_prefix, self.test_suffix, self.test_list3)
-        self.assertFalse(found_list1)
-        self.assertTrue(found_list2.pop() == 'aaaaazzzzz')
-        self.assertTrue(len(found_list3) == 2)
+        self.assertFalse(HaveIBeen._exists(self, self.test_suffix, self.test_list1))
+        self.assertTrue(HaveIBeen._exists(self, self.test_suffix, self.test_list2))
 
 
 if __name__ == '__main__':

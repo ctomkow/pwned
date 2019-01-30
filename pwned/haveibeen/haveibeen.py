@@ -2,6 +2,7 @@
 
 # core imports
 import hashlib
+import sys
 
 # 3rd party imports
 import requests
@@ -11,23 +12,18 @@ class HaveIBeen:
 
     def __init__(self):
 
-        pass
+        self.haveibeenpwned_url = "https://api.pwnedpasswords.com/range/"
 
     def check_password(self, password=''):
 
-        hash_pass = self._hash_password(password)
-        hash_prefix = hash_pass[:5]
-        hash_suffix = hash_pass[5:]
-        url = "https://api.pwnedpasswords.com/range/" + hash_prefix
-        req = requests.get(url)
+        hashed_pass = self._hash_password(password)
+        prefix, suffix = self._split_hash(hashed_pass)
+        pwned_hash_suffix_list = self._get_pwned_hashes(prefix)
 
-        returned_hash_suffix_list = req.text.splitlines()
-        found_hashes = self._search_list(hash_prefix, hash_suffix, returned_hash_suffix_list)
-
-        if not found_hashes:
-            return False
-        else:
+        if self._exists(suffix, pwned_hash_suffix_list):
             return True
+        else:
+            return False
 
     def _hash_password(self, password):
 
@@ -38,10 +34,30 @@ class HaveIBeen:
         hash_obj.update(password.encode())
         return hash_obj.hexdigest().upper()
 
-    def _search_list(self, prefix, suffix, hash_list):
+    def _split_hash(self, hash):
 
-        found_list = []
-        for onehash in hash_list:
-            if suffix in onehash:
-                found_list.append(prefix + onehash)
-        return found_list
+        prefix = hash[:5]
+        suffix = hash[5:]
+        return prefix, suffix
+
+    def _exists(self, suffix, hash_list):
+
+        for hash in hash_list:
+            if suffix in hash:
+                return True
+        return False
+
+    def _get_pwned_hashes(self, hash_prefix):
+
+        try:
+            req = requests.get(self.haveibeenpwned_url + hash_prefix)
+        except requests.exceptions.HTTPError as error:
+            # HTTP failure code
+            print(error + req.status_code)
+            sys.exit(1)
+        except requests.exceptions.RequestException as error:
+            # catch-all failure
+            print(error)
+            sys.exit(1)
+
+        return req.text.splitlines()
