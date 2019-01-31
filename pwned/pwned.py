@@ -1,14 +1,21 @@
 #!/usr/bin/env python3
 
-#core imports
+# core imports
 from getpass import getpass
+import sys
+import logging
 
 # local imports
 from .lpass.lpass import LPass
-from .haveibeen.haveibeen import HaveIBeen
+from .haveibeenpwned.haveibeenpwned import HaveIBeenPwned
 
 # 3rd party imports
 import click
+import click_log
+
+# logging
+log = logging.getLogger(__name__)
+click_log.basic_config(log)
 
 
 class Pwned:
@@ -18,6 +25,7 @@ class Pwned:
         self.main()
 
     @click.group()
+    @click_log.simple_verbosity_option(log)
     @click.pass_context
     def main(self):
 
@@ -42,7 +50,7 @@ class Pwned:
         id_list, username_list, password_list, url_list = lpass.connect()
 
         if haveibeenpwned:
-            haveibeenpwned = HaveIBeen()
+            haveibeenpwned = HaveIBeenPwned()
             for pass_id, username, password, url in zip(id_list, username_list, password_list, url_list):
                 if haveibeenpwned.check_password(password):
                     print(
@@ -60,15 +68,19 @@ class Pwned:
         if interactive:
             password = getpass('password:')
 
-        haveibeenpwned = HaveIBeen()
-        password_exists = haveibeenpwned.check_password(password)
+        haveibeenpwned = HaveIBeenPwned()
+
+        try:
+            password_exists = haveibeenpwned.check_password(password)
+        except ValueError as error:
+            log.error(error)
+            sys.exit(1)
 
         if password_exists:
             print('password EXISTS in haveibeenpwned database')
         else:
             print('password DOES NOT EXIST in haveibeenpwned database')
 
+    if __name__ == '__main__':
 
-if __name__ == '__main__':
-
-    Pwned()
+        Pwned()

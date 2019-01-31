@@ -7,13 +7,13 @@ python:
 
 before_install:
    - pip install -U pip
-   - pip install git+git://github.com/ctomkow/pwned
+   - pip install git+git://github.com/ctomkow/pwned.py
    - pip install codecov
 
 install:
 
 script:
-   - py.test --cov=pwned tests/
+   - py.test --cov=pwned.py tests/
 
 after_success:
   - codecov

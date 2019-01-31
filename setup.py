@@ -3,9 +3,9 @@ from setuptools import setup, find_packages
 REQUIRES_PYTHON = '>=3.5.0'
 
 setup(
-    name='pwned',
-    version='0.0.4',
-    url='https://github.com/ctomkow/pwned',
+    name='pwned.py',
+    version='0.0.5',
+    url='https://github.com/ctomkow/pwned.py',
     author='Craig Tomkow',
     author_email='ctomkow@gmail.com',
     license='MIT',
@@ -17,6 +17,6 @@ setup(
     ],
     entry_points={
           'console_scripts': ['pwned=pwned.pwned:Pwned'],
-      },
+    },
     zip_safe=False
 )

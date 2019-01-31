@@ -6,7 +6,7 @@ import hashlib
 
 # local imports
 from .. import context
-from haveibeen.haveibeen import HaveIBeen
+from haveibeenpwned.haveibeenpwned import HaveIBeenPwned
 
 
 class test_UpgradeCode(unittest.TestCase):
@@ -24,17 +24,17 @@ class test_UpgradeCode(unittest.TestCase):
 
     def test_hash_password(self):
 
-        hash1 = HaveIBeen._hash_password(self, self.test_pass1)
+        hash1 = HaveIBeenPwned._hash_password(self, self.test_pass1)
         self.hash_obj.update(self.test_pass1.encode())
         self.assertTrue(self.hash_obj.hexdigest().upper() == hash1)
 
-        self.assertRaises(ValueError, HaveIBeen._hash_password, self, self.test_pass2)
-        self.assertRaises(ValueError, HaveIBeen._hash_password, self, self.test_pass3)
+        self.assertRaises(ValueError, HaveIBeenPwned._hash_password, self, self.test_pass2)
+        self.assertRaises(ValueError, HaveIBeenPwned._hash_password, self, self.test_pass3)
 
     def test_exists(self):
 
-        self.assertFalse(HaveIBeen._exists(self, self.test_suffix, self.test_list1))
-        self.assertTrue(HaveIBeen._exists(self, self.test_suffix, self.test_list2))
+        self.assertFalse(HaveIBeenPwned._exists(self, self.test_suffix, self.test_list1))
+        self.assertTrue(HaveIBeenPwned._exists(self, self.test_suffix, self.test_list2))
 
 
 if __name__ == '__main__':
