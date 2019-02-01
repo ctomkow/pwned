@@ -9,7 +9,7 @@ from .. import context
 from haveibeenpwned.haveibeenpwned import HaveIBeenPwned
 
 
-class test_UpgradeCode(unittest.TestCase):
+class test_HaveIBeenPwned(unittest.TestCase):
 
     def setUp(self):
 
