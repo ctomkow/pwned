@@ -4,11 +4,17 @@
 
 Check whether a password exists in haveibeenpwned database. Either provide a single password as a cli command, interactively (to hide the password), or pull from a lastpass account.
 
-### Install
+#### Easy Install
 
 1. `pip3 install git+https://github.com/ctomkow/pwned.git`
 
-OR (if you like virtual python environments)
+#### Manual Install
+
+1. `git clone git+https://github.com/ctomkow/pwned.git`
+
+2. `cd pwned && python3 setup.py install`
+
+#### Virtual Install
 
 1. `python3 -m virtualenv venv`
 
@@ -16,8 +22,7 @@ OR (if you like virtual python environments)
 
 3. `pip3 install git+https://github.com/ctomkow/pwned.git`
 
-OR (if install location is not in your path, and you're feeling adventurous)
-
+#### _If all else fails_ Install
 1. `sudo pip3 install git+https://github.com/ctomkow/pwned.git`
 
 
@@ -33,7 +38,7 @@ OR (if install location is not in your path, and you're feeling adventurous)
 ### Development Notes
 
 For development, use virtualenv for testing (even with an IDE such as PyCharm).
-Simply, have a terminal in the venv instance, and `python setup.py install`, to test the cli.
+Simply, have a terminal in the venv instance, and `python3 setup.py install`, to test the cli.
 
 
 
