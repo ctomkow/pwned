@@ -13,7 +13,7 @@ before_install:
 install:
 
 script:
-   - py.test --cov=pwned.py tests/
+   - py.test --cov=pwned tests/
 
 after_success:
   - codecov
