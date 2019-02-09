@@ -71,13 +71,24 @@ class Pwned:
         if haveibeenpwned:
             haveibeenpwned = HaveIBeenPwned()
             for pass_id, username, password, url in zip(id_list, username_list, password_list, url_list):
-                if haveibeenpwned.check_password(password):
-                    print(
-                        "id:" + pass_id + "---" +
-                        "username:" + username + "---" +
-                        "password:" + password + "---" +
-                        "url:" + url
-                    )
+                try:
+                    if haveibeenpwned.check_password(password):
+                        log.info(
+                            "id:" + pass_id + "---" +
+                            "username:" + username + "---" +
+                            "password:" + password + "---" +
+                            "url:" + url
+                        )
+                except (ValueError, requests.exceptions.HTTPError, requests.exceptions.RequestException) as error:
+                    log.error(error)
+        else:
+            for pass_id, username, password, url in zip(id_list, username_list, password_list, url_list):
+                log.info(
+                    "id:" + pass_id + "---" +
+                    "username:" + username + "---" +
+                    "password:" + password + "---" +
+                    "url:" + url
+                )
 
     @main.command()
     @click.argument('password', required=False)
@@ -96,9 +107,9 @@ class Pwned:
             sys.exit(1)
 
         if password_exists:
-            print('password EXISTS in haveibeenpwned database')
+            log.info('Password HAS BEEN leaked. It is recommended to change password immediately!')
         else:
-            print('password DOES NOT EXIST in haveibeenpwned database')
+            log.info('Password IS NOT leaked. Whew.')
 
     if __name__ == '__main__':
 
