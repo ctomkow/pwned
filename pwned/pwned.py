@@ -48,10 +48,16 @@ class Pwned:
             if mfa == '':
                 mfa = None
 
-        lpass = LPass(username, password, mfa)
+        try:
+            lpass = LPass(username, password, mfa)
+        except ValueError as error:
+            log.error(error)
+            sys.exit(1)
+
         try:
             connection = lpass.connect()
         except (
+            exceptions.InvalidResponseError,
             exceptions.LastPassUnknownError,
             exceptions.LastPassUnknownUsernameError,
             exceptions.LastPassInvalidPasswordError,

@@ -11,6 +11,9 @@ class LPass:
 
     def __init__(self, username='', password='', mfa=''):
 
+        if not password:
+            raise ValueError("Password can not be empty.")
+
         self.username = username
         self.password = password
         self.mfa      = mfa
@@ -25,6 +28,7 @@ class LPass:
         try:
             return lastpass.Vault.open_remote(self.username, self.password, self.mfa)
         except (
+            exceptions.InvalidResponseError,
             exceptions.LastPassUnknownError,
             exceptions.LastPassUnknownUsernameError,
             exceptions.LastPassInvalidPasswordError,
