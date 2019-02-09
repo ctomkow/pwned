@@ -47,7 +47,7 @@ class Pwned:
                 mfa = None
 
         lpass = LPass(username, password, mfa)
-        id_list, username_list, password_list, url_list = lpass.connect()
+        id_list, username_list, password_list, url_list = lpass.get_vault(lpass.connect())
 
         if haveibeenpwned:
             haveibeenpwned = HaveIBeenPwned()

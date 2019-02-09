@@ -23,13 +23,15 @@ class LPass:
     def connect(self):
 
         try:
-            vault = lastpass.Vault.open_remote(self.username, self.password, self.mfa)
+            return lastpass.Vault.open_remote(self.username, self.password, self.mfa)
         except lastpass.LastPassIncorrectGoogleAuthenticatorCodeError:
             exit('missing or incorrect Google Authenticator code')
         except lastpass.LastPassInvalidPasswordError:
             exit('missing or incorrect lastpass password')
         except lastpass.LastPassUnknownUsernameError:
             exit('missing or incorrect lastpass username')
+
+    def get_vault(self, vault):
 
         for i in vault.accounts:
             self.id_list.append(i.id.decode("utf-8"))
