@@ -13,6 +13,7 @@ from .haveibeenpwned.haveibeenpwned import HaveIBeenPwned
 import click
 import click_log
 import requests
+from lastpass import exceptions
 
 # logging
 log = logging.getLogger(__name__)
@@ -48,7 +49,18 @@ class Pwned:
                 mfa = None
 
         lpass = LPass(username, password, mfa)
-        id_list, username_list, password_list, url_list = lpass.get_vault(lpass.connect())
+        try:
+            connection = lpass.connect()
+        except (
+            exceptions.LastPassUnknownError,
+            exceptions.LastPassUnknownUsernameError,
+            exceptions.LastPassInvalidPasswordError,
+            exceptions.LastPassIncorrectGoogleAuthenticatorCodeError
+        ) as error:
+            log.error(error)
+            sys.exit(1)
+
+        id_list, username_list, password_list, url_list = lpass.get_vault(connection)
 
         if haveibeenpwned:
             haveibeenpwned = HaveIBeenPwned()

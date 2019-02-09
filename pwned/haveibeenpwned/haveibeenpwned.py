@@ -2,7 +2,6 @@
 
 # core imports
 import hashlib
-import sys
 
 # 3rd party imports
 import requests

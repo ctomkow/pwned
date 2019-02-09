@@ -5,7 +5,7 @@ from sys import exit
 
 # 3rd party imports
 import lastpass
-
+from lastpass import exceptions
 
 class LPass:
 
@@ -24,12 +24,13 @@ class LPass:
 
         try:
             return lastpass.Vault.open_remote(self.username, self.password, self.mfa)
-        except lastpass.LastPassIncorrectGoogleAuthenticatorCodeError:
-            exit('missing or incorrect Google Authenticator code')
-        except lastpass.LastPassInvalidPasswordError:
-            exit('missing or incorrect lastpass password')
-        except lastpass.LastPassUnknownUsernameError:
-            exit('missing or incorrect lastpass username')
+        except (
+            exceptions.LastPassUnknownError,
+            exceptions.LastPassUnknownUsernameError,
+            exceptions.LastPassInvalidPasswordError,
+            exceptions.LastPassIncorrectGoogleAuthenticatorCodeError
+        ) as error:
+            raise error
 
     def get_vault(self, vault):
 
