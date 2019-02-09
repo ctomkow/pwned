@@ -9,32 +9,39 @@ from .. import context
 from haveibeenpwned.haveibeenpwned import HaveIBeenPwned
 
 
-class test_UpgradeCode(unittest.TestCase):
+class test_HaveIBeenPwned(unittest.TestCase):
 
     def setUp(self):
 
         self.hash_obj = hashlib.sha1()
-        self.test_pass1 = 'password1'
-        self.test_pass2 = ''
-        self.test_pass3 = None
 
-        self.test_suffix = 'zzzzz'
-        self.test_list1 = ['xxxxx', 'yyyyy']
-        self.test_list2 = ['xxxxx', 'yyyyy', 'zzzzz']
+        self.pass_1 = 'aaaaazzzzz'
+        self.pass_2 = ''
+        self.pass_3 = None
+
+        self.prefix = 'aaaaa'
+        self.suffix = 'zzzzz'
+        self.list_1 = ['aaaaa', 'bbbbb']
 
     def test_hash_password(self):
 
-        hash1 = HaveIBeenPwned._hash_password(self, self.test_pass1)
-        self.hash_obj.update(self.test_pass1.encode())
+        hash1 = HaveIBeenPwned._hash_password(self, self.pass_1)
+        self.hash_obj.update(self.pass_1.encode())
         self.assertTrue(self.hash_obj.hexdigest().upper() == hash1)
 
-        self.assertRaises(ValueError, HaveIBeenPwned._hash_password, self, self.test_pass2)
-        self.assertRaises(ValueError, HaveIBeenPwned._hash_password, self, self.test_pass3)
+        self.assertRaises(ValueError, HaveIBeenPwned._hash_password, self, self.pass_2)
+        self.assertRaises(ValueError, HaveIBeenPwned._hash_password, self, self.pass_3)
+
+    def test_split_hash(self):
+
+        pre, suf = HaveIBeenPwned._split_hash(self, self.pass_1)
+        self.assertEqual(pre, self.prefix)
+        self.assertEqual(suf, self.suffix)
 
     def test_exists(self):
 
-        self.assertFalse(HaveIBeenPwned._exists(self, self.test_suffix, self.test_list1))
-        self.assertTrue(HaveIBeenPwned._exists(self, self.test_suffix, self.test_list2))
+        self.assertTrue(HaveIBeenPwned._exists(self, self.prefix, self.list_1))
+        self.assertFalse(HaveIBeenPwned._exists(self, self.suffix, self.list_1))
 
 
 if __name__ == '__main__':
