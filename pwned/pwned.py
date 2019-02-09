@@ -12,6 +12,7 @@ from .haveibeenpwned.haveibeenpwned import HaveIBeenPwned
 # 3rd party imports
 import click
 import click_log
+import requests
 
 # logging
 log = logging.getLogger(__name__)
@@ -72,7 +73,7 @@ class Pwned:
 
         try:
             password_exists = haveibeenpwned.check_password(password)
-        except ValueError as error:
+        except (ValueError, requests.exceptions.HTTPError, requests.exceptions.RequestException) as error:
             log.error(error)
             sys.exit(1)
 

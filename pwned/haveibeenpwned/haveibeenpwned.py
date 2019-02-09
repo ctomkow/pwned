@@ -22,7 +22,11 @@ class HaveIBeenPwned:
             raise error
 
         prefix, suffix = self._split_hash(hashed_pass)
-        pwned_hash_suffix_list = self._get_pwned_hashes(prefix)
+
+        try:
+            pwned_hash_suffix_list = self._get_pwned_hashes(prefix)
+        except (requests.exceptions.HTTPError, requests.exceptions.RequestException) as error:
+            raise error
 
         if self._exists(suffix, pwned_hash_suffix_list):
             return True
@@ -55,13 +59,8 @@ class HaveIBeenPwned:
 
         try:
             req = requests.get(self.haveibeenpwned_url + hash_prefix)
-        except requests.exceptions.HTTPError as error:
-            # HTTP failure code
-            print(error + req.status_code)
-            sys.exit(1)
-        except requests.exceptions.RequestException as error:
-            # catch-all failure
-            print(error)
-            sys.exit(1)
+        except (requests.exceptions.HTTPError, requests.exceptions.RequestException) as error:
+            # HTTP failure of some kind
+            raise error
 
         return req.text.splitlines()
