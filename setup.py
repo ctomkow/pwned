@@ -4,7 +4,7 @@ REQUIRES_PYTHON = '>=3.5.0'
 
 setup(
     name='pwned.py',
-    version='0.0.5',
+    version='0.0.6',
     url='https://github.com/ctomkow/pwned.py',
     author='Craig Tomkow',
     author_email='ctomkow@gmail.com',

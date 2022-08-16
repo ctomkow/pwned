@@ -1,0 +1,8 @@
+.venv/
+*.code-workspace
+.vscode
+build/
+dist/
+*.py.egg-info
+pwned/lpass/__pycache__/
+pwned/haveibeenpwned/__pycache__/
