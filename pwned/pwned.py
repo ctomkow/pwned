@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
+# local imports
+from lpass.lpass import LPass
+from haveibeenpwned.haveibeenpwned import HaveIBeenPwned
+
 # core imports
 from getpass import getpass
 import sys
 import logging
-
-# local imports
-from .lpass.lpass import LPass
-from .haveibeenpwned.haveibeenpwned import HaveIBeenPwned
 
 # 3rd party imports
 import click
@@ -111,6 +111,6 @@ class Pwned:
         else:
             log.info('Password IS NOT leaked. Whew.')
 
-    if __name__ == '__main__':
 
-        Pwned()
+if __name__ == '__main__':
+    Pwned()
