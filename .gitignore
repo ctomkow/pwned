@@ -3,6 +3,6 @@
 .vscode
 build/
 dist/
-*.py.egg-info
+*.egg-info
 pwned/lpass/__pycache__/
 pwned/haveibeenpwned/__pycache__/
